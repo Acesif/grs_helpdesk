@@ -26,7 +26,7 @@ class SettingsTableSeeder extends Seeder
         if (Setting::where('key', 'app_name')->count() === 0) {
             $setting = new Setting();
             $setting->key = 'app_name';
-            $setting->value = env('APP_NAME', 'Laradesk');
+            $setting->value = env('APP_NAME', 'GRS_HelpDesk');
             $setting->is_env = true;
             $setting->save();
         }
@@ -41,7 +41,7 @@ class SettingsTableSeeder extends Seeder
         if (Setting::where('key', 'meta_home_title')->count() === 0) {
             $setting = new Setting();
             $setting->key = 'meta_home_title';
-            $setting->value = env('APP_NAME', 'Laradesk').' - Helpdesk ticketing system';
+            $setting->value = env('APP_NAME', 'GRS_HelpDesk').' - Helpdesk system for GRS';
             $setting->save();
         }
         if (Setting::where('key', 'meta_keywords')->count() === 0) {
@@ -53,7 +53,7 @@ class SettingsTableSeeder extends Seeder
         if (Setting::where('key', 'meta_description')->count() === 0) {
             $setting = new Setting();
             $setting->key = 'meta_description';
-            $setting->value = 'A simple and clean platform that allows users to create tickets and get support from your staff';
+            $setting->value = 'A helpdesk system for the Grievance Redress System';
             $setting->save();
         }
         // Appearance
@@ -107,7 +107,7 @@ class SettingsTableSeeder extends Seeder
             $setting = new Setting();
             $setting->key = 'app_default_role';
             $setting->value = UserRole::where([
-                ['name', '=', 'Customer'],
+                ['name', '=', 'Officer'],
                 ['type', '=', '1'],
             ])->first()->id;
             $setting->save();

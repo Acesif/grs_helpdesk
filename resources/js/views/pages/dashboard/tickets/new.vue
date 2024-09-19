@@ -131,12 +131,15 @@
                                 <!-- Template Section -->
                                 <div v-if="ticket.attachments.length > 0" class="col-span-3">
                                     <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2">
-                                        <template v-for="(attachment, index) in ticket.attachments" :key="index">
+                                        <!-- <template v-for="(attachment, index) in ticket.attachments" :key="index">
                                             <div class="relative">
                                                 <attachment :details="attachment" v-on:remove="removeAttachment(index)"/>
                                                 <img v-if="attachment.preview" :src="attachment.preview" class="w-32 h-32 object-cover mt-2" alt="Preview">
                                             </div>
-                                        </template>
+                                        </template> -->
+                                        <div v-for="(attachment, index) in ticket.attachments" :key="index" class="relative">
+                                            <attachment :details="attachment" v-on:remove="removeAttachment(index)"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

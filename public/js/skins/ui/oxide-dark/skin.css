@@ -1563,7 +1563,6 @@ body.tox-dialog__disable-scroll {
   display: block;
 }
 .tox .tox-control-wrap__status-icon-wrap {
-  display: hidden;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

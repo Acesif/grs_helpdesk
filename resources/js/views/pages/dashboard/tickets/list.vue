@@ -648,7 +648,7 @@ export default {
                 agents: [],
                 departments: [],
                 labels: [],
-                statuses: [1, 2],
+                statuses: [1, 2, 3],
                 priorities: [],
             },
             quickActions: {

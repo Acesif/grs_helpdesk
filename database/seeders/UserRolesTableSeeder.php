@@ -27,17 +27,17 @@ class UserRolesTableSeeder extends Seeder
             $userRole->save();
             // Add User Role
             $userRole = new UserRole();
-            $userRole->name = 'User';
+            $userRole->name = 'Officer';
             $userRole->type = 1;
             $userRole->permissions = json_encode([str_replace('\\', '.', DashboardStatsController::class)], JSON_THROW_ON_ERROR);
             $userRole->dashboard_access = 0;
             $userRole->save();
-            // Customer Role
+            // Dept_Admin_IT Role
             $userRole = new UserRole();
-            $userRole->name = 'Customer';
+            $userRole->name = 'Dept_Admin_IT';
             $userRole->type = 1;
             $userRole->permissions = '[]';
-            $userRole->dashboard_access = 0;
+            $userRole->dashboard_access = 1;
             $userRole->save();
         }
     }
