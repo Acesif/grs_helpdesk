@@ -1,7 +1,7 @@
 # PHP and MySQL versions
-- PHP: 7.4.32
-- MySQL: 8.0.39
-- Node: 16.20.2
+- PHP: [7.4.32](https://www.php.net/releases/)
+- MySQL: [8.0.39](https://dev.mysql.com/downloads/installer/)
+- Node: [16.20.2](https://nodejs.org/en/blog/release/v16.20.2)
 
 # Commands for set up
 
