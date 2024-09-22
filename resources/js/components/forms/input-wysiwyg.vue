@@ -11,7 +11,7 @@
                 :d="id"
                 :init="editorConfig"
             />
-            <input :id="id" ref="imageInput" :accept="allowed.join()" hidden type="file" @change="uploadFile($event)">
+            <!-- <input :id="id" ref="imageInput" :accept="allowed.join()" hidden type="file" @change="uploadFile($event)"> -->
         </template>
         <slot name="bottom"/>
         <div v-show="openSidebar" :class="{'z-1500': openSidebar}" class="fixed inset-0 overflow-hidden">
@@ -85,7 +85,7 @@ import "tinymce/icons/default";
 import "tinymce/themes/silver";
 import "tinymce/plugins/paste";
 import "tinymce/plugins/link";
-import "tinymce/plugins/image";
+// import "tinymce/plugins/image";
 import "tinymce/plugins/code";
 import "tinymce/plugins/fullscreen";
 import "tinymce/plugins/autoresize";
@@ -165,17 +165,18 @@ export default {
                     theme: 'silver'
                 },
                 contextmenu_never_use_native: true,
-                plugins: 'paste image link code fullscreen autoresize',
-                toolbar: 'undo redo | upload attachment link cannedReply shortCode | fullscreen code',
+                // plugins: 'paste image link code fullscreen autoresize',
+                plugins: 'paste link code fullscreen autoresize',
+                toolbar: 'undo redo | attachment link cannedReply shortCode | fullscreen code',
                 setup: function (editor) {
-                    if (self.plugins.images) {
-                        editor.ui.registry.addButton('upload', {
-                            icon: 'image',
-                            onAction: function (_) {
-                                self.$refs.imageInput.click();
-                            }
-                        });
-                    }
+                    // if (self.plugins.images) {
+                    //     editor.ui.registry.addButton('upload', {
+                    //         icon: 'image',
+                    //         onAction: function (_) {
+                    //             self.$refs.imageInput.click();
+                    //         }
+                    //     });
+                    // }
                     if (self.plugins.cannedReply) {
                         editor.ui.registry.addButton('cannedReply', {
                             icon: 'comment-add',
@@ -222,10 +223,10 @@ export default {
             const formData = new FormData();
             formData.append('file', e.target.files[0]);
             axios.post('api/files', formData, {headers: {'Content-Type': 'multipart/form-data'}}).then(function (response) {
-                self.$refs.imageInput.value = null;
+                // self.$refs.imageInput.value = null;
                 self.$refs.editor.editor.insertContent('<img src="' + response.data.url + '" width="100%" height="100%" alt="' + response.data.name + '"/>');
             }).catch(function () {
-                self.$refs.imageInput.value = null;
+                // self.$refs.imageInput.value = null;
             });
         },
         closeSidebar() {

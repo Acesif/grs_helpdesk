@@ -32,27 +32,61 @@ class FileController extends Controller
      * @param  StoreImageRequest  $request
      * @return JsonResponse
      */
+
+
+    // public function store(StoreImageRequest $request): JsonResponse
+    // {
+    //     $request->validated();
+    //     if ($request->file('file')) {
+    //         $image = $request->file('file');
+    //         $file = new File();
+    //         $file->uuid = Str::uuid();
+    //         $file->name = $image->getClientOriginalName();
+    //         $file->size = $image->getSize();
+    //         $file->mime = $image->getMimeType();
+    //         $file->extension = Str::lower($image->getClientOriginalExtension());
+    //         $file->disk = 'public';
+    //         $file->path = date('Y').'/'.date('m');
+    //         $file->server_name = md5($image->getRealPath()).'.'.$file->extension;
+    //         $file->user_id = Auth::id();
+    //         if ($image->storeAs($file->path, $file->server_name, $file->disk) && $file->save()) {
+    //             return response()->json(new FileResource($file));
+    //         }
+    //     }
+    //     return response()->json(['message' => __('An error occurred while saving data')], 500);
+    // }
+    
     public function store(StoreImageRequest $request): JsonResponse
     {
+        // Validate the uploaded file
         $request->validated();
+
         if ($request->file('file')) {
-            $image = $request->file('file');
+            // Store the file in the public disk, under a dynamic date-based directory
+            $filePath = $request->file('file')->store('public/' . date('Y') . '/' . date('m'));
+
+            // Create a new File instance to store metadata in the database
             $file = new File();
             $file->uuid = Str::uuid();
-            $file->name = $image->getClientOriginalName();
-            $file->size = $image->getSize();
-            $file->mime = $image->getMimeType();
-            $file->extension = Str::lower($image->getClientOriginalExtension());
-            $file->disk = 'public';
-            $file->path = date('Y').'/'.date('m');
-            $file->server_name = md5($image->getRealPath()).'.'.$file->extension;
-            $file->user_id = Auth::id();
-            if ($image->storeAs($file->path, $file->server_name, $file->disk) && $file->save()) {
+            $file->name = $request->file('file')->getClientOriginalName(); // Get the original file name
+            $file->size = $request->file('file')->getSize(); // Get file size
+            $file->mime = $request->file('file')->getMimeType(); // Get MIME type
+            $file->extension = Str::lower($request->file('file')->getClientOriginalExtension()); // Get file extension
+            $file->disk = 'public'; // Specify the disk
+            $file->path = 'public/' . date('Y') . '/' . date('m'); // Store file path
+            $file->server_name = md5($request->file('file')->getRealPath()) . '.' . $file->extension; // Generate a unique server name
+            $file->user_id = Auth::id(); // Store the user who uploaded the file
+
+            // Move the file to the correct location and save its metadata in the database
+            if (Storage::disk($file->disk)->put($file->path . '/' . $file->server_name, file_get_contents($request->file('file')->getRealPath())) && $file->save()) {
                 return response()->json(new FileResource($file));
             }
         }
+
+        // Return error if the file was not saved
         return response()->json(['message' => __('An error occurred while saving data')], 500);
     }
+
 
     public function uploadAttachment(StoreFileRequest $request): JsonResponse
     {

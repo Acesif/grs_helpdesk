@@ -57,7 +57,7 @@
                                             <input-wysiwyg
                                                 id="ticket_body"
                                                 v-model="ticket.body"
-                                                :plugins="{images: true, attachment: true}"
+                                                :plugins="{images: false, attachment: true}"
                                                 @selectUploadFile="selectUploadFile"
                                             >
                                                 <template v-slot:top>
