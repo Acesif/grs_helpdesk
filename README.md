@@ -2,6 +2,7 @@
 - PHP: [7.4.32](https://www.php.net/releases/)
 - MySQL: [8.0.39](https://dev.mysql.com/downloads/installer/)
 - Node: [16.20.2](https://nodejs.org/en/blog/release/v16.20.2)
+- Composer: [2.7.9](https://getcomposer.org/download/)
 
 # Commands for set up
 
