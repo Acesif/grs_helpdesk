@@ -5,9 +5,10 @@
 
 # Commands for set up
 
-## Installing node packages
+## Installing node and laravel packages
 ```
 npm install
+composer install
 ```
 
 ## Migrate and seed the database
