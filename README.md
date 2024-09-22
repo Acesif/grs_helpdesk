@@ -20,3 +20,5 @@ php artisan db:seed
 ```
 php artisan serve
 ```
+
+#### Please rename `.env.sample` to `.env` before running locally
