@@ -24,3 +24,4 @@ php artisan serve
 ```
 
 #### Please rename `.env.sample` to `.env` before running locally
+#### Uncomment ;extension=fileinfo and other relevant extensions from php.ini
